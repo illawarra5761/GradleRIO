@@ -44,8 +44,8 @@ class Robot : IterativeRobot() {
     }
 
     override fun teleopPeriodic() {
-      val x = controller.getY(Hand.kRight)
-      val y = controller.getY(Hand.kLeft)
+      val x = controller.getX(Hand.kLeft)
+      val y = controller.getY(Hand.kRight)
 
       var leftPower = clamp(y + x)
       var rightPower = clamp(y - x)
