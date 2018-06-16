@@ -14,12 +14,12 @@ class Robot : IterativeRobot() {
     val RIGHT_A_CANID = 3
     val RIGHT_B_CANID = 4
 
-    var controller: XboxController? = null
+    lateinit var controller: XboxController
 
-    var leftA: WPI_TalonSRX? = null
-    var leftB: WPI_TalonSRX? = null
-    var rightA: WPI_TalonSRX? = null
-    var rightB: WPI_TalonSRX? = null
+    lateinit var leftA: WPI_TalonSRX
+    lateinit var leftB: WPI_TalonSRX
+    lateinit var rightA: WPI_TalonSRX
+    lateinit var rightB: WPI_TalonSRX
 
     override fun robotInit() {
         println("Hello Illawarra 9761")
@@ -31,8 +31,8 @@ class Robot : IterativeRobot() {
         rightA = WPI_TalonSRX(RIGHT_A_CANID)
         rightB = WPI_TalonSRX(RIGHT_B_CANID)
 
-        leftB!!.follow(leftA)
-        rightB!!.follow(rightA)
+        leftB.follow(leftA)
+        rightB.follow(rightA)
     }
 
     fun clamp(num: Double): Double {
@@ -44,12 +44,12 @@ class Robot : IterativeRobot() {
     }
 
     override fun teleopPeriodic() {
-      val x = controller!!.getY(Hand.kRight)
-      val y = controller!!.getY(Hand.kLeft)
+      val x = controller.getY(Hand.kRight)
+      val y = controller.getY(Hand.kLeft)
 
       var leftPower = clamp(y + x)
       var rightPower = clamp(y - x)
-      leftA!!.set(leftPower)
-      rightA!!.set(rightPower)
+      leftA.set(leftPower)
+      rightA.set(rightPower)
     }
 }
